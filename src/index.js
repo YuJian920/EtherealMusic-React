@@ -1,11 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
+import App from "./pages/App"
 import "./index.less";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <div className="title">你好, EtherealMuisc-React</div>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("Ethereal"));

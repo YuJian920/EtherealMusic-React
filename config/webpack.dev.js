@@ -20,6 +20,7 @@ module.exports = (env) => {
       host: "127.0.0.1",
       stats: "errors-only",
       overlay: true,
+      hot: true,
     },
     devtool: "eval-source-map",
     optimization: {

@@ -1,14 +1,15 @@
-const path = require("path");
+const paths = require('./paths')
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent");
 const WebpackBar = require("webpackbar");
 // const NyanProgressPlugin = require("nyan-progress-webpack-plugin");
 
 module.exports = (env) => {
+
   return {
-    entry: { index: "./src/index.js" },
+    entry: [paths.src + '/index.js'],
     // 打包目录
-    output: { path: path.resolve(__dirname, "dist/") },
+    output: { path: paths.build },
     // 生成 index.html
     plugins: [
       new WebpackBar({ name: "EtherealMusic-React", color: "#ff00ff" }),
@@ -23,7 +24,7 @@ module.exports = (env) => {
         {
           test: /\.(js|jsx)?$/,
           use: ["babel-loader"],
-          include: path.resolve(__dirname, "src"),
+          include: paths.src
         },
         {
           test: /\.less$/,
@@ -47,10 +48,11 @@ module.exports = (env) => {
             "less-loader",
           ],
         },
-        {
-          test: /\.(jpe?g|png|gif|svg|woff|woff2|eot|ttf|otf)$/i,
-          type: "asset/resource",
-        },
+        // Images: Copy image files to build folder
+        { test: /\.(?:ico|gif|png|svg|jpg|jpeg)$/i, type: "asset/resource" },
+
+        // Fonts and SVGs: Inline files
+        { test: /\.(woff(2)?|eot|ttf|otf|)$/, type: "asset/inline" },
       ],
     },
     cache: {

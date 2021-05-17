@@ -1,30 +1,42 @@
-const { merge } = require("webpack-merge");
-const common = require("./webpack.common.js");
+const paths = require('./paths')
+const Dotenv = require('dotenv-webpack')
+const { merge } = require('webpack-merge')
+const common = require('./webpack.common.js')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
-module.exports = (env) => {
-  return merge(common(env), {
-    mode: "development",
-    output: {
-      filename: "js/[name].js",
-    },
-    cache: {
-      type: "filesystem",
-      // 可选配置
-      buildDependencies: {
-        config: [__filename], // 当构建依赖的config文件（通过 require 依赖）内容发生变化时，缓存失效
+module.exports = merge(common, {
+  mode: 'development',
+  devtool: "eval-source-map",
+  devServer: {
+    stats: "errors-only",
+    historyApiFallback: true,
+    contentBase: paths.build,
+    open: false,
+    compress: true,
+    hot: true,
+    port: 9201,
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.[js]sx?$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: require.resolve('babel-loader'),
+            options: {
+              plugins: [require.resolve('react-refresh/babel')].filter(Boolean),
+            },
+          },
+        ],
       },
-      name: "development-cache", // 配置以name为隔离，创建不同的缓存文件，如生成PC或mobile不同的配置缓存
-    },
-    devServer: {
-      port: 9201,
-      host: "127.0.0.1",
-      stats: "errors-only",
-      overlay: true,
-      hot: true,
-    },
-    devtool: "eval-source-map",
-    optimization: {
-      moduleIds: "deterministic",
-    },
-  });
-};
+    ],
+  },
+  plugins: [
+    new Dotenv({
+      path: './.env.development',
+    }),
+    new ReactRefreshWebpackPlugin(),
+  ].filter(Boolean),
+})

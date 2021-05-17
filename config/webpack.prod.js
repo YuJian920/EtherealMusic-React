@@ -1,46 +1,39 @@
-const { merge } = require("webpack-merge");
-const common = require("./webpack.common.js");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
-const MomentLocalesPlugin = require("moment-locales-webpack-plugin");
-const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
-const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const paths = require('./paths')
+const Dotenv = require('dotenv-webpack')
+const { merge } = require('webpack-merge')
+const common = require('./webpack.common.js')
 
-module.exports = (env) => {
-  return merge(common(env), {
-    mode: "production",
-    output: {
-      filename: "js/[name].[contenthash].js",
-    },
-    plugins: [
-      // 打包之前清空打包目录
-      new CleanWebpackPlugin(),
-      // 打包分析
-      new BundleAnalyzerPlugin(),
-      // 去除 moment 多余语言包
-      new MomentLocalesPlugin({
-        localesToKeep: ["zh-cn"],
-      }),
-      // 生成 manifest.json
-      new WebpackManifestPlugin(),
-      // 将 css 从 js 中分离
-      new MiniCssExtractPlugin({
-        filename: "css/[name].[contenthash].css",
-      }),
-    ],
-    optimization: {
-      minimize: true,
-      minimizer: [
-        new TerserPlugin({
-          parallel: true,
-        }),
-        new CssMinimizerPlugin(),
-      ],
-      splitChunks: {
-        chunks: "async",
-      },
-    },
-  });
-};
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+
+module.exports = merge(common, {
+  mode: 'production',
+  devtool: false,
+  output: {
+    path: paths.build,
+    publicPath: '/',
+    filename: 'js/[name].[contenthash].bundle.js',
+  },
+  plugins: [
+    new Dotenv({
+      path: './.env.production',
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'styles/[name].[contenthash].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
+  module: {
+    rules: [],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [`...`, new TerserPlugin(), new CssMinimizerPlugin()],
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
+})

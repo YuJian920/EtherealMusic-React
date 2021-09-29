@@ -1,60 +1,26 @@
 {
   "name": "etherealmusic-react",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "`一个很简单的叫EtherealMuisc的音乐播放器；这个是它的Web端`",
-  "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --config config/webpack.dev.js",
-    "build": "NODE_ENV=production webpack --config config/webpack.prod.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/YuJian920/EtherealMusic-React.git"
-  },
-  "keywords": [
-    "EtherealMusic-React"
-  ],
-  "author": "YuJian",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/YuJian920/EtherealMusic-React/issues"
-  },
-  "homepage": "https://github.com/YuJian920/EtherealMusic-React#readme",
-  "devDependencies": {
-    "@babel/core": "^7.14.0",
-    "@babel/plugin-proposal-class-properties": "^7.13.0",
-    "@babel/plugin-transform-runtime": "^7.13.15",
-    "@babel/preset-env": "^7.14.1",
-    "@babel/preset-react": "^7.13.13",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
-    "@svgr/webpack": "^5.5.0",
-    "autoprefixer": "^10.2.5",
-    "babel-loader": "^8.2.2",
-    "clean-webpack-plugin": "^3.0.0",
-    "css-loader": "^5.2.4",
-    "css-minimizer-webpack-plugin": "^2.0.0",
-    "dotenv-webpack": "^6.0.4",
-    "html-webpack-plugin": "^5.3.1",
-    "less": "^4.1.1",
-    "less-loader": "^9.0.0",
-    "mini-css-extract-plugin": "^1.6.0",
-    "postcss": "^8.2.14",
-    "postcss-import": "^14.0.1",
-    "postcss-loader": "^5.2.0",
-    "prettier": "^2.2.1",
-    "react-refresh": "^0.9.0",
-    "sass-loader": "^11.0.1",
-    "style-loader": "^2.0.0",
-    "terser-webpack-plugin": "^5.1.1",
-    "webpack": "^5.36.2",
-    "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2",
-    "webpack-merge": "^5.7.3",
-    "webpackbar": "^5.0.0-3"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
   },
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "tailwindcss": "^2.1.2"
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-router-dom": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.3.0",
+    "@vitejs/plugin-react": "^1.0.0",
+    "autoprefixer": "^10.3.6",
+    "postcss": "^8.3.8",
+    "tailwindcss": "^2.2.16",
+    "typescript": "^4.3.2",
+    "vite": "^2.5.4"
   }
 }

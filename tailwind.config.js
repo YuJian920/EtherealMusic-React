@@ -1,11 +1,16 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
-  purge: ['./src/**/*.js'],
-  darkMode: false, // or 'media' or 'class'
+  mode: "jit",
+  purge: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontWeight: ["hover", "focus"],
+      fontFamily: {
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+      },
+    },
   },
-  variants: {
-    extend: {},
-  },
+  variants: {},
   plugins: [],
-}
+};

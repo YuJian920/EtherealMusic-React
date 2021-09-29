@@ -10,7 +10,7 @@
 - React-Redux
 - Tailwind CSS
 - Axios
-- Webpack 5
+- Vite 2
 
 ## 本地运行
 
@@ -22,13 +22,10 @@
   cd EtherealMuisc-React
   
   # 安装依赖
-  yarn & npm
+  yarn & npm i
   
-  # 运行微信小程序
-  yarn dev:weapp & npm run dev:weapp
-
-  # 运行H5
-  yarn dev:h5 & npm run dev:weapp
+  # 运行项目
+  yarn dev & npm run dev
 ```
 
 

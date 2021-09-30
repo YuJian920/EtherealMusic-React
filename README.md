@@ -10,6 +10,8 @@
 - React-Redux
 - Tailwind CSS
 - Axios
+- TypeScript
+- Less
 - Vite 2
 
 ## 本地运行
